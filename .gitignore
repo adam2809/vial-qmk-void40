@@ -1,3 +1,6 @@
+qmk/
+qmk_venv/
+
 # Junk files
 *.bak
 *.swp
