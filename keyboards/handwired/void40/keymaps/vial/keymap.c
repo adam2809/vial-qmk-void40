@@ -2,6 +2,7 @@
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
+    _FPS,
     _BASE,
     _RAISE,
     _LOWER,
@@ -20,6 +21,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * │Ctl│   │GUI│Alt│Lwr│Spc│Ent│Rse│ ← │ ↓ │ ↑ │ → │
      * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
      */
+    [_FPS] = LAYOUT_ortho_4x12(
+        KC_NO,    KC_NO,    RGB_TOG,  RGB_MOD,  RGB_HUI,  RGB_HUD,  RGB_SAI,  RGB_SAD,  RGB_VAI,  RGB_VAD,  KC_NO, KC_DEL,
+        KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO, KC_NO,
+        KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO, KC_NO,
+        KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_TRNS,  KC_NO,    KC_NO,    KC_TRNS,  KC_NO,    KC_NO,    KC_NO, KC_NO
+    ),
     [_BASE] = LAYOUT_ortho_4x12(
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,       KC_T,     KC_Y,     KC_U,       KC_I,    KC_O,    KC_P,    KC_BSPC,
         KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,       KC_G,     KC_H,     KC_J,       KC_K,    KC_L,    KC_SCLN, KC_QUOT,
@@ -51,6 +58,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+}
+
+void keyboard_post_init_user(void) {
+    set_single_persistent_default_layer(_BASE);
 }
 
 /*
